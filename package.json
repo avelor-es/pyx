@@ -1,0 +1,40 @@
+{
+  "name": "@avelor/pyx",
+  "version": "0.1.0",
+  "description": "Keep a server's .env without logging into the server.",
+  "keywords": [
+    "env",
+    "dotenv",
+    "secrets",
+    "ssh",
+    "server",
+    "developer-tools",
+    "cli"
+  ],
+  "license": "MIT",
+  "author": "Avelor <cruz@avelor.es>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avelor-es/pyx"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "type": "module",
+  "bin": {
+    "pyx": "./bin/pyx.js"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

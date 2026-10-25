@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="760" height="514" viewBox="0 0 760 514" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <style>
+    text { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 14px; opacity: 0;
+           animation-duration: 16.0s; animation-iteration-count: infinite; animation-timing-function: linear; }
+    .t   { fill: #DDE0E6; }
+    .c   { fill: #FFFFFF; }
+    .p   { fill: #E2C171; }
+    .g   { fill: #6B7480; }
+    .w   { fill: #E5B567; }
+    .ok  { fill: #62E081; }
+    .err { fill: #F07070; }
+    @keyframes l0 { 0%, 2.50% { opacity: 0; } 2.81%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l1 { 0%, 8.75% { opacity: 0; } 9.06%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l2 { 0%, 15.00% { opacity: 0; } 15.31%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l3 { 0%, 18.12% { opacity: 0; } 18.44%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l4 { 0%, 23.75% { opacity: 0; } 24.06%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l6 { 0%, 30.00% { opacity: 0; } 30.31%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l7 { 0%, 35.00% { opacity: 0; } 35.31%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l8 { 0%, 36.25% { opacity: 0; } 36.56%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l9 { 0%, 36.88% { opacity: 0; } 37.19%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l10 { 0%, 37.50% { opacity: 0; } 37.81%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l11 { 0%, 38.12% { opacity: 0; } 38.44%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l13 { 0%, 45.00% { opacity: 0; } 45.31%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l14 { 0%, 50.00% { opacity: 0; } 50.31%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l16 { 0%, 55.00% { opacity: 0; } 55.31%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l17 { 0%, 61.25% { opacity: 0; } 61.56%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l18 { 0%, 63.12% { opacity: 0; } 63.44%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes l19 { 0%, 68.12% { opacity: 0; } 68.44%, 95.00% { opacity: 1; } 100% { opacity: 0; } }
+  </style>
+</defs>
+
+<rect width="760" height="514" rx="10" fill="#0E1116"/>
+<rect width="760" height="34" rx="10" fill="#161B22"/>
+<rect y="24" width="760" height="10" fill="#161B22"/>
+<circle cx="22" cy="17" r="6" fill="#F07070"/>
+<circle cx="42" cy="17" r="6" fill="#E5B567"/>
+<circle cx="62" cy="17" r="6" fill="#62E081"/>
+<text x="380" y="22" text-anchor="middle" style="opacity: 1; animation: none; font-size: 12px; fill: #6B7480">~/code/shop</text>
+
+  <text x="28" y="70" style="animation-name: l0" xml:space="preserve"><tspan class="p">$ </tspan><tspan class="c">pyx add STRIPE_KEY</tspan></text>
+  <text x="28" y="91" style="animation-name: l1" xml:space="preserve"><tspan class="t">STRIPE_KEY: </tspan><tspan class="g">••••••••••••••</tspan></text>
+  <text x="28" y="112" style="animation-name: l2" xml:space="preserve"><tspan class="ok">✓ </tspan><tspan class="t">STRIPE_KEY created</tspan></text>
+  <text x="28" y="133" style="animation-name: l3" xml:space="preserve"><tspan class="g">→ </tspan><tspan class="t">reload: pm2 restart shop</tspan></text>
+  <text x="28" y="154" style="animation-name: l4" xml:space="preserve"><tspan class="ok">✓ </tspan><tspan class="t">reloaded</tspan></text>
+  <text x="28" y="196" style="animation-name: l6" xml:space="preserve"><tspan class="p">$ </tspan><tspan class="c">pyx ls</tspan></text>
+  <text x="28" y="217" style="animation-name: l7" xml:space="preserve"><tspan class="g">→ </tspan><tspan class="t">shop · /srv/shop/.env</tspan></text>
+  <text x="28" y="238" style="animation-name: l8" xml:space="preserve"><tspan class="t">  DATABASE_URL    </tspan><tspan class="g">9c41e07a</tspan></text>
+  <text x="28" y="259" style="animation-name: l9" xml:space="preserve"><tspan class="t">  LEGACY_TOKEN    </tspan><tspan class="g">71aa04de</tspan></text>
+  <text x="28" y="280" style="animation-name: l10" xml:space="preserve"><tspan class="t">  SMTP_PASSWORD   </tspan><tspan class="w">(empty)</tspan></text>
+  <text x="28" y="301" style="animation-name: l11" xml:space="preserve"><tspan class="t">  STRIPE_KEY      </tspan><tspan class="g">3f9a2c1e</tspan></text>
+  <text x="28" y="343" style="animation-name: l13" xml:space="preserve"><tspan class="p">$ </tspan><tspan class="c">pyx rm LEGACY_TOKEN --no-reload</tspan></text>
+  <text x="28" y="364" style="animation-name: l14" xml:space="preserve"><tspan class="ok">✓ </tspan><tspan class="t">LEGACY_TOKEN removed</tspan></text>
+  <text x="28" y="406" style="animation-name: l16" xml:space="preserve"><tspan class="p">$ </tspan><tspan class="c">pbpaste | pyx add SMTP_PASSWORD</tspan></text>
+  <text x="28" y="427" style="animation-name: l17" xml:space="preserve"><tspan class="ok">✓ </tspan><tspan class="t">SMTP_PASSWORD updated</tspan></text>
+  <text x="28" y="448" style="animation-name: l18" xml:space="preserve"><tspan class="g">→ </tspan><tspan class="t">reload: pm2 restart shop</tspan></text>
+  <text x="28" y="469" style="animation-name: l19" xml:space="preserve"><tspan class="ok">✓ </tspan><tspan class="t">reloaded</tspan></text>
+</svg>
