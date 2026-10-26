@@ -1,4 +1,4 @@
-// The Mac side: every ls, add and rm runs `pyx remote …` on the server over ssh.
+// The local side: every ls, add and rm runs `pyx remote …` on the server over ssh.
 import { spawn, spawnSync } from 'node:child_process';
 import { fatal } from './fmt.js';
 

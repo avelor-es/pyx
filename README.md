@@ -1,8 +1,8 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="pyx-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="pyx-light.svg">
-    <img src="pyx-light.svg" alt="pyx — keep a server's .env without logging into the server" width="700">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/avelor-es/pyx/main/pyx-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/avelor-es/pyx/main/pyx-light.svg">
+    <img src="https://raw.githubusercontent.com/avelor-es/pyx/main/pyx-light.svg" alt="pyx — keep a server's .env without logging into the server" width="700">
   </picture>
 </p>
 
@@ -17,7 +17,7 @@ pyx add STRIPE_KEY
 ```
 
 <p align="center">
-  <img src="demo.svg" alt="pyx add, pyx ls and pyx rm in a terminal" width="700"/>
+  <img src="https://raw.githubusercontent.com/avelor-es/pyx/main/demo.svg" alt="pyx add, pyx ls and pyx rm in a terminal" width="700"/>
 </p>
 
 ## Why pyx
@@ -30,7 +30,7 @@ pyx add STRIPE_KEY
 
 ## Quick start
 
-On your machine **and** on the server:
+On your machine **and** on the server, both macOS or Linux:
 
 ```sh
 npm install -g @avelor/pyx

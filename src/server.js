@@ -1,4 +1,4 @@
-// The server side: `pyx remote …`, called over ssh by the Mac. Values never leave this machine.
+// The server side: `pyx remote …`, called over ssh from the local machine. Values never leave this machine.
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';

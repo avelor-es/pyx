@@ -1,4 +1,4 @@
-// The Mac side of setup: asks everything, keeps host and project in .pyx.yml,
+// The local side of setup: asks everything, keeps host and project in .pyx.yml,
 // and sends the directory and the reload command to the server only.
 import fs from 'node:fs';
 import os from 'node:os';
@@ -89,7 +89,7 @@ export async function init() {
 
     const remote = JSON.parse(capture(host, ['info', project]));
     ok(`connected to ${host}`);
-    if (remote.version !== VERSION) warn(`the server runs pyx ${remote.version}, this Mac ${VERSION}`);
+    if (remote.version !== VERSION) warn(`the server runs pyx ${remote.version}, this machine ${VERSION}`);
 
     let register = !remote.exists;
     if (remote.exists) {

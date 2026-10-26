@@ -13,9 +13,13 @@
   ],
   "license": "MIT",
   "author": "Avelor <cruz@avelor.es>",
+  "homepage": "https://github.com/avelor-es/pyx#readme",
+  "bugs": {
+    "url": "https://github.com/avelor-es/pyx/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/avelor-es/pyx"
+    "url": "git+https://github.com/avelor-es/pyx.git"
   },
   "publishConfig": {
     "access": "public"

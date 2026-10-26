@@ -82,7 +82,7 @@ switch (cmd) {
     break;
   }
 
-  case 'remote': // called over ssh by the Mac side
+  case 'remote': // called over ssh by the local side
     await remote(args.filter(a => !a.startsWith('--')), flags);
     break;
 
