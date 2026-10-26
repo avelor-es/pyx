@@ -19,7 +19,7 @@ function explain(code, host) {
 // Streams the server's output; the value, when there is one, travels on stdin and never as an argument.
 export function run(host, args, input) {
   return new Promise(resolve => {
-    const child = spawn('ssh', ['-T', host, command(args)], {
+    const child = spawn('ssh', ['-T', '--', host, command(args)], {
       stdio: [input === undefined ? 'ignore' : 'pipe', 'inherit', 'inherit'],
     });
     if (input !== undefined) child.stdin.end(input);
@@ -31,7 +31,7 @@ export function run(host, args, input) {
 }
 
 export function capture(host, args) {
-  const r = spawnSync('ssh', ['-T', host, command(args)], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'] });
+  const r = spawnSync('ssh', ['-T', '--', host, command(args)], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'] });
   explain(r.status, host);
   if (r.status !== 0) process.exit(r.status ?? 1);
   return r.stdout;

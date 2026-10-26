@@ -54,10 +54,20 @@ test('remove drops every occurrence and nothing else', () => {
 test('quote leaves safe values bare and picks a quote the value lacks', () => {
   assert.equal(quote('re_123-abc.def:8790/x@y+z'), 're_123-abc.def:8790/x@y+z');
   assert.equal(quote('two words'), `'two words'`);
-  assert.equal(quote(`it's`), '`it\'s`');
-  assert.equal(quote(`it's \`x\``), `"it's \`x\`"`);
-  assert.throws(() => quote(`' \` "`));
+  assert.equal(quote('a $b'), `'a $b'`);
+  assert.equal(quote(`it's`), `"it's"`);
+  for (const v of [`it's "x"`, `it's $x`, `it's \\n`]) {
+    assert.throws(() => quote(v));
+    assert.ok(valueError(v));
+  }
   for (const v of ['a b', 'a#b', `it's`, 'a\\nb']) assert.equal(values(`K=${quote(v)}`).get('K'), v);
+});
+
+test('a quote never closed is a single line and does not swallow the rest', () => {
+  const text = "A='oops\nB=1\nC=2\n";
+  assert.equal(set(text, 'A', 'x').text, 'A=x\nB=1\nC=2\n');
+  assert.equal(remove(text, 'A').text, 'B=1\nC=2\n');
+  assert.equal(values(text).get('B'), '1');
 });
 
 test('valueError rejects empty and multi-line values', () => {

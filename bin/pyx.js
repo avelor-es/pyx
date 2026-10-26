@@ -5,7 +5,7 @@ import { run } from '../src/ssh.js';
 import { remote } from '../src/server.js';
 import { check, valueError, KEY_RE } from '../src/env.js';
 import { secret, readStdin } from '../src/ask.js';
-import { fatal, ok, warn, G, W, R, Z, VERSION } from '../src/fmt.js';
+import { fatal, ok, info, warn, G, W, R, Z, VERSION } from '../src/fmt.js';
 
 const USAGE = `
 ${G}pyx${Z} — keep a server's .env without logging into the server
@@ -54,6 +54,7 @@ switch (cmd) {
   case 'add': {
     needKey();
     const c = loadConfig();
+    info(`${c.project} on ${c.host}`);
     const value = process.stdin.isTTY
       ? await secret(`${key}: `)
       : (await readStdin()).replace(/\r?\n$/, ''); // `pbpaste | pyx add KEY`, `echo … | pyx add KEY`

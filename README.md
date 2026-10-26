@@ -166,9 +166,9 @@ The reload command is any shell command, run in the project's directory: `pm2 re
 ## How the .env is written
 
 - `add` rewrites the key's line where it is, dropping later duplicates, or appends it at the end. `rm` removes only that key's lines.
-- Values are written bare when nothing in them could be misread, and otherwise wrapped in the first of `'`, `` ` `` or `"` they do not contain. Double quotes come last because Node expands `\n` inside them.
-- Each write goes to a sibling file that is then renamed over `.env`.
-- The file keeps its permissions; a new `.env` is created `0600`. pyx refuses to write a `.env` owned by another user rather than take it over.
+- Values are written bare when nothing in them could be misread, otherwise in single quotes, otherwise (when they contain `'`) in double quotes. A value with `'` and also `"`, `\` or `$` is refused: Node, phpdotenv, python-dotenv and Ruby dotenv would each read it differently.
+- Each write goes to a sibling file that is then renamed over `.env`. A symlinked `.env` is written through to its target.
+- The file keeps its permissions and its group; a new `.env` is created `0600`. pyx refuses to write a `.env` owned by another user rather than take it over.
 - If the reload fails, the `.env` has already been written: pyx shows the reload's output and exits with `1`.
 
 ## FAQ

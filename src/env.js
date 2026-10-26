@@ -14,10 +14,12 @@ export function parse(text) {
     let raw = m[2];
     const q = raw[0];
     if (QUOTES.includes(q) && raw.indexOf(q, 1) === -1) {
-      // A quoted value left open runs until the line that closes it.
-      while (i + 1 < lines.length) {
-        raw += '\n' + lines[++i];
-        if (lines[i].includes(q)) break;
+      // A quoted value left open runs until the line that closes it; one never closed is a single line,
+      // so a stray quote cannot swallow the rest of the file.
+      const close = lines.findIndex((l, j) => j > i && l.includes(q));
+      if (close !== -1) {
+        raw = [raw, ...lines.slice(i + 1, close + 1)].join('\n');
+        i = close;
       }
     }
     entries.push({ key: m[1], value: unquote(raw), start, end: i });
@@ -36,18 +38,24 @@ function unquote(raw) {
   return (hash === -1 ? raw : raw.slice(0, hash)).trim();
 }
 
-// Unquoted when nothing in the value could be misread; otherwise the first quote it does not contain.
-// Double quotes go last because Node expands \n inside them.
+// Unquoted when nothing in the value could be misread, else single quotes, else double quotes
+// when nothing inside them is escaped or expanded. Only quoting that Node, phpdotenv, python-dotenv
+// and Ruby dotenv all read the same way; backticks are Node-only.
 export function quote(value) {
   if (/^[\w.\-:/@+,=%]*$/.test(value)) return value;
-  const q = QUOTES.find(c => !value.includes(c));
-  if (!q) throw new Error('the value contains \', ` and " at once, which no .env quoting can hold');
-  return q + value + q;
+  if (!value.includes('\'')) return `'${value}'`;
+  if (!/["\\$]/.test(value)) return `"${value}"`;
+  throw new Error('the value has \' together with ", \\ or $, which .env parsers read differently');
 }
 
 export function valueError(value) {
   if (!value) return 'the value is empty';
   if (/[\r\n]/.test(value)) return 'the value spans more than one line';
+  try {
+    quote(value);
+  } catch (e) {
+    return e.message;
+  }
   return null;
 }
 

@@ -11,6 +11,10 @@ import { fatal, ok, info, warn, VERSION } from './fmt.js';
 
 export const CONFIG_FILE = '.pyx.yml';
 
+// .pyx.yml comes from the repo: a host such as `-oProxyCommand=…` would run a command on this machine.
+export const HOST_RE = /^[A-Za-z0-9_.@:\[\]-]+$/;
+const hostError = host => (!HOST_RE.test(host) || host.startsWith('-') ? `invalid ssh host: ${host}` : null);
+
 // Found from any directory inside the project, like git.
 export function loadConfig() {
   for (let dir = process.cwd(); ; dir = path.dirname(dir)) {
@@ -18,6 +22,8 @@ export function loadConfig() {
     if (fs.existsSync(file)) {
       const c = load(fs.readFileSync(file, 'utf8')) ?? {};
       if (!c.host || !c.project) fatal(`${file} needs both host and project`);
+      const problem = hostError(String(c.host));
+      if (problem) fatal(`${problem} in ${file}`);
       return c;
     }
     if (dir === path.dirname(dir)) fatal(`no ${CONFIG_FILE} here or above\n  run pyx init in the project's root`);
@@ -62,6 +68,7 @@ export async function init() {
     const hosts = sshHosts();
     if (hosts.length) info(`hosts in ~/.ssh/config: ${hosts.join(', ')}`);
     const host = await ask('SSH host or alias', hosts[0]);
+    if (hostError(host)) fatal(hostError(host));
     const project = await ask('Project', defaultProject());
     if (!NAME_RE.test(project)) fatal('the project name may only use letters, digits, ".", "_" and "-"');
 

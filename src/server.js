@@ -64,22 +64,31 @@ function ownedByMe(file) {
 }
 
 // Write a sibling file, then rename: the app never reads a half-written .env.
+// A symlinked .env (shared/.env in Capistrano-style deploys) is written through, not replaced.
 function writeEnv(dir, text) {
-  const file = path.join(dir, '.env');
-  let mode = 0o600;
+  let file = path.join(dir, '.env');
+  let st = null;
   if (fs.existsSync(file)) {
-    if (!ownedByMe(file)) fatal(`${file} belongs to another user; pyx will not change its owner`);
-    mode = fs.statSync(file).mode & 0o777;
+    file = fs.realpathSync(file);
+    st = fs.statSync(file);
+    if (st.uid !== process.getuid()) fatal(`${file} belongs to another user; pyx will not change its owner`);
   }
-  const tmp = path.join(dir, `.env.pyx-${process.pid}`);
+  const mode = st ? st.mode & 0o777 : 0o600;
+  const tmp = path.join(path.dirname(file), `.env.pyx-${process.pid}`);
   const fd = fs.openSync(tmp, 'wx', mode);
   try {
     fs.writeSync(fd, text);
     fs.fsyncSync(fd);
-  } finally {
+    // Keep the group: a 0640 deploy:www-data .env must stay readable by the web server.
+    if (st) fs.fchownSync(fd, st.uid, st.gid);
+    fs.fchmodSync(fd, mode); // the umask may have narrowed it
+  } catch (e) {
     fs.closeSync(fd);
+    fs.rmSync(tmp, { force: true });
+    if (e.code === 'EPERM') fatal(`cannot keep the group of ${file}; ${os.userInfo().username} is not in it. Nothing was changed`);
+    throw e;
   }
-  fs.chmodSync(tmp, mode); // the umask may have narrowed it
+  fs.closeSync(fd);
   fs.renameSync(tmp, file);
 }
 
